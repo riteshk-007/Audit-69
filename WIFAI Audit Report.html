@@ -133,41 +133,6 @@
           link.dispatchEvent(new MouseEvent("click"));
         });
 
-      // Add the link to your PDF FILE.
-      const pdfUrl = "/pdf3.pdf";
-
-      // Get the container element
-      const container = document.getElementById("pdf-container");
-
-      // Load PDF document
-      pdfjsLib.getDocument(pdfUrl).promise.then((pdfDoc) => {
-        // This for loop, loops through all of the pages and loads the doc
-        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-          pdfDoc.getPage(pageNum).then((page) => {
-            // Create a viewport to render the PDF page. The higher number you add to the scale, the bigger the pdf file will look.
-            const viewport = page.getViewport({ scale: 0.25 });
-
-            // Set the dimensions of the container to match the PDF page
-            container.style.width = viewport.width + "px";
-            container.style.height = viewport.height + "px";
-
-            // Prepare the canvas element to render the PDF page
-            const canvas = document.createElement("canvas");
-            container.appendChild(canvas);
-
-            // Set the canvas dimensions
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
-
-            // Render the PDF page on the canvas
-            const renderContext = {
-              canvasContext: canvas.getContext("2d"),
-              viewport: viewport,
-            };
-            page.render(renderContext);
-          });
-        }
-      });
     </script>
    
   </body>
